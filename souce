@@ -36,12 +36,6 @@ PlayerSection:NewButton("Stick Mag", ":P", function(state)
 fireclickdetector(workspace.GUNS.StickMag.ClickDetector)
 end)
 
-local Player = Window:NewTab("Teleports")
-local PlayerSection = Player:NewSection("Teleport")
-PlayerSection:NewButton("Gun Store 1", "Yur", function(state)
-fireclickdetector(workspace.GUNS.StickMag.ClickDetector)
-end)
-
 local Player = Window:NewTab("Player")
 local PlayerSection = Player:NewSection("Player")
 PlayerSection:NewTextBox("Gun Modification", "Type Gun Name Here", function(txt)
