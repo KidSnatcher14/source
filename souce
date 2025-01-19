@@ -1,0 +1,81 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Bronx Wars", "BloodTheme")
+
+local Main = Window:NewTab("Money")
+local MainSection = Main:NewSection("(MUST BE LEVEL 5)")
+MainSection:NewButton("$20000", ":P", function()
+local args = {
+    [1] = "20,000\194\163"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("UI"):WaitForChild("DAILYSPIN"):FireServer(unpack(args))
+end)
+MainSection:NewButton("Auto $20000", ":P", function()
+while true do
+wait(.01)
+local args = {
+    [1] = "20,000\194\163"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("UI"):WaitForChild("DAILYSPIN"):FireServer(unpack(args))
+end
+end)
+
+local Player = Window:NewTab("Ammo")
+local PlayerSection = Player:NewSection("Ammo")
+PlayerSection:NewButton("Standard Mag", ":P", function(state)
+fireclickdetector(workspace.GUNS.StandardMag.ClickDetector)
+end)
+PlayerSection:NewButton("Extended Mag", ":P", function(state)
+fireclickdetector(workspace.GUNS.ExtendedMag.ClickDetector)
+end)
+PlayerSection:NewButton("Drum Mag", ":P", function(state)
+fireclickdetector(workspace.GUNS.DrumMag.ClickDetector)
+end)
+PlayerSection:NewButton("Stick Mag", ":P", function(state)
+fireclickdetector(workspace.GUNS.StickMag.ClickDetector)
+end)
+
+local Player = Window:NewTab("Teleports")
+local PlayerSection = Player:NewSection("Teleport")
+PlayerSection:NewButton("Gun Store 1", "Yur", function(state)
+fireclickdetector(workspace.GUNS.StickMag.ClickDetector)
+end)
+
+local Player = Window:NewTab("Player")
+local PlayerSection = Player:NewSection("Player")
+PlayerSection:NewTextBox("Gun Modification", "Type Gun Name Here", function(txt)
+local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
+bitch["Auto"] = true
+bitch["FireRate"] = 0.05
+bitch["ReloadTime"] = 0
+bitch["Spread"] = 0
+bitch["Recoil"] = 0
+bitch["BulletSpeed"] = 9999
+bitch["VisibleBullet"] = false
+bitch["BulletHoleSize"] = 0
+bitch["DamageDropOffEnabled"] = false
+bitch["CameraRecoilingEnabled"] = false
+bitch["HeadshotDamageMultiplier"] = 100
+bitch["BulletHoleVisibleTime"] = 0
+bitch["BulletHoleTexture"] = {0}
+bitch["HitCharSndIDs"] = {9099130679}
+bitch["HitSoundIDs"] = {7895471766}
+end)
+
+local Player = Window:NewTab("Extras")
+local PlayerSection = Player:NewSection("Extras")
+PlayerSection:NewButton("Adonis Bypass", ":P", function(state)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua'))()
+end)
+PlayerSection:NewButton("Hitbox Extender", ":P", function(state)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/RectangularObject/UniversalHBE/refs/heads/main/main.lua'))()
+end)
+PlayerSection:NewButton("Instant Interact", ":P", function(state)
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+  fireproximityprompt(prompt)
+end)
+end)
+PlayerSection:NewButton("Infinite Yield", ":P", function(state)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
