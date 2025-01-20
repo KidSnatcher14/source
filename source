@@ -1,8 +1,114 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Bronx Wars", "BloodTheme")
 
-local Main = Window:NewTab("Money")
-local MainSection = Main:NewSection("(MUST BE LEVEL 5)")
+local Player = Window:NewTab("Player")
+local PlayerSection = Player:NewSection("Player")
+PlayerSection:NewTextBox("Gun Modification", "Type Gun Name Here", function(txt)
+local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
+bitch["Auto"] = true
+bitch["FireRate"] = 0.05
+bitch["ReloadTime"] = 0
+bitch["Spread"] = 0
+bitch["Recoil"] = 0
+bitch["BulletSpeed"] = 9999
+bitch["VisibleBullet"] = false
+bitch["BulletHoleSize"] = 0
+bitch["DamageDropOffEnabled"] = false
+bitch["CameraRecoilingEnabled"] = false
+bitch["HeadshotDamageMultiplier"] = 100
+bitch["BulletHoleVisibleTime"] = 0
+bitch["BulletHoleTexture"] = {0}
+bitch["HitCharSndIDs"] = {9099130679}
+bitch["HitSoundIDs"] = {7895471766}
+end)
+PlayerSection:NewTextBox("ChatGPT Cframe", "Type Speed Here", function(txt)
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local humanoid = character:WaitForChild("Humanoid")
+
+local minSpeed = 1
+local maxSpeed = 10
+local speed = (txt)
+local speedEnabled = false
+
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+
+userInputService.InputBegan:Connect(function(input, processed)
+    if not processed then
+        if input.KeyCode == Enum.KeyCode.Z then
+            speedEnabled = not speedEnabled
+            if not speedEnabled then
+                humanoidRootPart.Velocity = Vector3.zero 
+                humanoidRootPart.AssemblyLinearVelocity = Vector3.zero 
+                humanoidRootPart.AssemblyAngularVelocity = Vector3.zero
+                humanoidRootPart.Anchored = true  
+                task.wait(0.1)
+                humanoidRootPart.Anchored = false
+            end
+        elseif input.KeyCode == Enum.KeyCode.X then
+            speed = math.min(speed + 1, maxSpeed) 
+        elseif input.KeyCode == Enum.KeyCode.C then
+            speed = math.max(speed - 1, minSpeed) 
+        end
+    end
+end)
+
+
+runService.RenderStepped:Connect(function(deltaTime)
+    if speedEnabled then
+        humanoidRootPart.Anchored = false 
+        local moveDirection = humanoidRootPart.CFrame.LookVector
+        humanoidRootPart.CFrame = humanoidRootPart.CFrame + (moveDirection * speed * deltaTime)
+    end
+end)
+end)
+
+local Main = Window:NewTab("Guns")
+local MainSection = Main:NewSection("Guns")
+MainSection:NewButton("FN57 ($2250)", ":P", function(state)
+fireclickdetector(workspace.GUNS.FN57.ClickDetector)
+end)
+MainSection:NewButton("Five-Seven ($2350)", ":P", function(state)
+fireclickdetector(workspace.GUNS.FiveSeven.ClickDetector)
+end)
+MainSection:NewButton("G17 ($2350)", ":P", function(state)
+fireclickdetector(workspace.GUNS["Glock 17"].ClickDetector)
+end)
+MainSection:NewButton("G19X ($2550)", ":P", function(state)
+fireclickdetector(workspace.GUNS.Glock19X.ClickDetector)
+end)
+MainSection:NewButton("G20 ($2550)", ":P", function(state)
+fireclickdetector(workspace.GUNS.Glock20.ClickDetector)
+end)
+MainSection:NewButton("G20Ext ($3250)", ":P", function(state)
+fireclickdetector(workspace.GUNS["Glock20 Extended"].ClickDetector)
+end)
+MainSection:NewButton("MP5 ($5850)", ":P", function(state)
+fireclickdetector(workspace.GUNS.MP5.ClickDetector)
+end)
+MainSection:NewButton("Mac-10 ($4050)", ":P", function(state)
+fireclickdetector(workspace.GUNS.Mac10.ClickDetector)
+end)
+MainSection:NewButton("SpringfieldXD ($1850)", ":P", function(state)
+fireclickdetector(workspace.GUNS.SpringfieldXD.ClickDetector)
+end)
+MainSection:NewButton("M6 ($2300)", ":P", function(state)
+fireclickdetector(workspace.GUNS.M6Gun.ClickDetector)
+end)
+MainSection:NewButton("Tec-9 ($3250)", ":P", function(state)
+fireclickdetector(workspace.GUNS["Tec-9"].ClickDetector)
+end)
+MainSection:NewButton("M4 Carbine ($8200)", ":P", function(state)
+fireclickdetector(workspace.GUNS.M4Carbine.ClickDetector)
+end)
+MainSection:NewButton("Draco ($6300)", ":P", function(state)
+fireclickdetector(workspace.GUNS.Draco.ClickDetector)
+end)
+
+local Main = Window:NewTab("Free Shit")
+local MainSection = Main:NewSection("(GOING OVER 200 MILLION CASH WILL CK YOU)")
 MainSection:NewButton("$20000", ":P", function()
 local args = {
     [1] = "20,000\194\163"
@@ -82,27 +188,6 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5864.497
 end)
 PlayerSection:NewButton("Swiping Computer", ":P", function(state)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5720.27294921875, 3022.00146484375, 1788.4832763671875)
-end)
-
-local Player = Window:NewTab("Player")
-local PlayerSection = Player:NewSection("Player")
-PlayerSection:NewTextBox("Gun Modification", "Type Gun Name Here", function(txt)
-local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
-bitch["Auto"] = true
-bitch["FireRate"] = 0.05
-bitch["ReloadTime"] = 0
-bitch["Spread"] = 0
-bitch["Recoil"] = 0
-bitch["BulletSpeed"] = 9999
-bitch["VisibleBullet"] = false
-bitch["BulletHoleSize"] = 0
-bitch["DamageDropOffEnabled"] = false
-bitch["CameraRecoilingEnabled"] = false
-bitch["HeadshotDamageMultiplier"] = 100
-bitch["BulletHoleVisibleTime"] = 0
-bitch["BulletHoleTexture"] = {0}
-bitch["HitCharSndIDs"] = {9099130679}
-bitch["HitSoundIDs"] = {7895471766}
 end)
 
 local Player = Window:NewTab("Extras")
