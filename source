@@ -21,6 +21,24 @@ bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {9099130679}
 bitch["HitSoundIDs"] = {7895471766}
 end)
+PlayerSection:NewTextBox("Cum Everywhere", "Type Gun Name Here", function(txt)
+local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
+bitch["Auto"] = true
+bitch["FireRate"] = 0.05
+bitch["ReloadTime"] = 0
+bitch["Spread"] = 0
+bitch["Recoil"] = 0
+bitch["BulletSpeed"] = 9999
+bitch["VisibleBullet"] = false
+bitch["BulletHoleSize"] = 999999
+bitch["DamageDropOffEnabled"] = false
+bitch["CameraRecoilingEnabled"] = false
+bitch["HeadshotDamageMultiplier"] = 100
+bitch["BulletHoleVisibleTime"] = 999999
+bitch["BulletHoleTexture"] = {0}
+bitch["HitCharSndIDs"] = {7260915425}
+bitch["HitSoundIDs"] = {7260915425}
+end)
 PlayerSection:NewTextBox("ChatGPT Cframe", "Z", function(txt)
 local player = game:GetService("Players").LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
