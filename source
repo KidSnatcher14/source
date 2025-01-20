@@ -107,8 +107,22 @@ MainSection:NewButton("Draco ($6300)", ":P", function(state)
 fireclickdetector(workspace.GUNS.Draco.ClickDetector)
 end)
 
-local Main = Window:NewTab("Free Shit")
+local Main = Window:NewTab("Free")
 local MainSection = Main:NewSection("(GOING OVER 200 MILLION CASH WILL CK YOU)")
+MainSection:NewButton("Random Gun", ":P", function()
+local args = {
+    [1] = "FIREARM"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("UI"):WaitForChild("DAILYSPIN"):FireServer(unpack(args))
+end)
+MainSection:NewButton("3X Money", ":P", function()
+local args = {
+    [1] = "3X MONEY"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("UI"):WaitForChild("DAILYSPIN"):FireServer(unpack(args))
+end)
 MainSection:NewButton("$20000", ":P", function()
 local args = {
     [1] = "20,000\194\163"
