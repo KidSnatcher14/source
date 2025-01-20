@@ -21,14 +21,14 @@ bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {9099130679}
 bitch["HitSoundIDs"] = {7895471766}
 end)
-PlayerSection:NewTextBox("ChatGPT Cframe", "Type Speed Here", function(txt)
+PlayerSection:NewTextBox("ChatGPT Cframe", "Z", function(txt)
 local player = game:GetService("Players").LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
 
 local minSpeed = 1
-local maxSpeed = 10
+local maxSpeed = 1000
 local speed = (txt)
 local speedEnabled = false
 
