@@ -21,7 +21,7 @@ bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {9099130679}
 bitch["HitSoundIDs"] = {7895471766}
 end)
-PlayerSection:NewTextBox("Cum Everywhere", "Type Gun Name Here", function(txt)
+PlayerSection:NewTextBox("Piss Everywhere", "Type Gun Name Here", function(txt)
 local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
 bitch["Auto"] = true
 bitch["FireRate"] = 1
