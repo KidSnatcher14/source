@@ -3,20 +3,6 @@ local Window = Library.CreateLib("Bronx Wars", "BloodTheme")
 
 local Player = Window:NewTab("Player")
 local PlayerSection = Player:NewSection("Player")
-PlayerSection:NewTextBox("Gun Modification (Without Sounds)", "Type Gun Name Here", function(txt)
-local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
-bitch["Auto"] = true
-bitch["FireRate"] = 0.05
-bitch["ReloadTime"] = 0
-bitch["Spread"] = 0
-bitch["Recoil"] = 0
-bitch["VisibleBullet"] = false
-bitch["BulletHoleSize"] = 0
-bitch["DamageDropOffEnabled"] = false
-bitch["CameraRecoilingEnabled"] = false
-bitch["HeadshotDamageMultiplier"] = 100
-bitch["BulletHoleVisibleTime"] = 0
-end)
 PlayerSection:NewTextBox("Gun Modification", "Type Gun Name Here", function(txt)
 local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
 bitch["Auto"] = true
@@ -34,6 +20,20 @@ bitch["BulletHoleVisibleTime"] = 0
 bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {9099130679}
 bitch["HitSoundIDs"] = {7895471766}
+end)
+PlayerSection:NewTextBox("Gun Modification (Without Sounds)", "Type Gun Name Here", function(txt)
+local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
+bitch["Auto"] = true
+bitch["FireRate"] = 0.05
+bitch["ReloadTime"] = 0
+bitch["Spread"] = 0
+bitch["Recoil"] = 0
+bitch["VisibleBullet"] = false
+bitch["BulletHoleSize"] = 0
+bitch["DamageDropOffEnabled"] = false
+bitch["CameraRecoilingEnabled"] = false
+bitch["HeadshotDamageMultiplier"] = 100
+bitch["BulletHoleVisibleTime"] = 0
 end)
 PlayerSection:NewTextBox("Cum Everywhere", "Type Gun Name Here", function(txt)
 local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
