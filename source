@@ -24,7 +24,7 @@ end)
 PlayerSection:NewTextBox("Cum Everywhere", "Type Gun Name Here", function(txt)
 local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
 bitch["Auto"] = true
-bitch["FireRate"] = 0.2
+bitch["FireRate"] = 0.02
 bitch["ReloadTime"] = 0
 bitch["Spread"] = 0
 bitch["Recoil"] = 0
