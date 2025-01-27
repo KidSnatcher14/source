@@ -20,6 +20,7 @@ bitch["BulletHoleVisibleTime"] = 0
 bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {9099130679}
 bitch["HitSoundIDs"] = {7895471766}
+bitch["Lifesteal"] = 1
 end)
 PlayerSection:NewTextBox("Cum Everywhere", "Type Gun Name Here", function(txt)
 local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
@@ -38,6 +39,7 @@ bitch["BulletHoleVisibleTime"] = 999999
 bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {7260915425}
 bitch["HitSoundIDs"] = {7260915425}
+bitch["Lifesteal"] = 1
 end)
 PlayerSection:NewTextBox("ChatGPT Cframe", "Z", function(txt)
 local player = game:GetService("Players").LocalPlayer
