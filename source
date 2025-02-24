@@ -92,45 +92,57 @@ bitch["HitSoundIDs"] = {7260915425}
 bitch["Lifesteal"] = 1
 end)
 PlayerSection:NewTextBox("ChatGPT Cframe", "Z", function(txt)
-local player = game:GetService("Players").LocalPlayer
+local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
-
-local minSpeed = 1
-local maxSpeed = 1000
-local speed = (txt)
-local speedEnabled = false
-
-local userInputService = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
+local userInputService = game:GetService("UserInputService")
 
-userInputService.InputBegan:Connect(function(input, processed)
-    if not processed then
-        if input.KeyCode == Enum.KeyCode.Z then
-            speedEnabled = not speedEnabled
-            if not speedEnabled then
-                humanoidRootPart.Velocity = Vector3.zero 
-                humanoidRootPart.AssemblyLinearVelocity = Vector3.zero 
-                humanoidRootPart.AssemblyAngularVelocity = Vector3.zero
-                humanoidRootPart.Anchored = true  
-                task.wait(0.1)
-                humanoidRootPart.Anchored = false
-            end
-        elseif input.KeyCode == Enum.KeyCode.X then
-            speed = math.min(speed + 1, maxSpeed) 
-        elseif input.KeyCode == Enum.KeyCode.C then
-            speed = math.max(speed - 1, minSpeed) 
+local speed = (txt)
+local spinSpeed = 100
+local isRunning = false -- Check if running is active
+
+-- Disable the default walking/running animations
+humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+
+-- Function to start running
+local function startRunning()
+    isRunning = true
+    humanoid.WalkSpeed = 0 -- Disable walk speed to prevent the default running
+end
+
+-- Function to stop running
+local function stopRunning()
+    isRunning = false
+    humanoid.WalkSpeed = 16 -- Restore the default walk speed if needed
+end
+
+-- Listen for Z key press to toggle running
+userInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if gameProcessedEvent then return end
+
+    if input.KeyCode == Enum.KeyCode.Z then
+        if not isRunning then
+            startRunning()
+        else
+            stopRunning()
         end
     end
 end)
 
+-- Continuously spin the character, even when idle
+runService.Heartbeat:Connect(function(deltaTime)
+    -- Spin the character around the Y-axis constantly (idle or moving)
+    humanoidRootPart.CFrame = humanoidRootPart.CFrame * CFrame.Angles(0, math.rad(spinSpeed * deltaTime), 0)
 
-runService.RenderStepped:Connect(function(deltaTime)
-    if speedEnabled then
-        humanoidRootPart.Anchored = false 
-        local moveDirection = humanoidRootPart.CFrame.LookVector
-        humanoidRootPart.CFrame = humanoidRootPart.CFrame + (moveDirection * speed * deltaTime)
+    if isRunning then
+        local moveDirection = humanoid.MoveDirection
+        if moveDirection.Magnitude > 0 then
+            -- Apply the "speed" to simulate movement, but do not change the position (no animation)
+            local velocity = moveDirection * speed * deltaTime
+            humanoidRootPart.CFrame = humanoidRootPart.CFrame + velocity
+        end
     end
 end)
 end)
