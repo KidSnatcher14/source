@@ -313,9 +313,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/
 end)
 PlayerSection:NewButton("Skeleton ESP", "(Made by blissful all reserved to them)", function(state)
 local settings = {
-    Color = Color3.fromRGB(255, 0, 0),
+    Color = Color3.fromRGB(255, 71, 77),
     Size = 15,
-    Transparency = 1, -- 1 Visible - 0 Not Visible
+    Transparency = 1,
     AutoScale = true
 }
 
