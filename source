@@ -1,3 +1,53 @@
+getgenv().bronx = {
+    Visuals = {
+        Self = {
+            Enabled = true,
+            ForceField_Chams = true,
+            Color = Color3.fromRGB(255, 71, 77),
+            Held_ForceField_Chams = true,
+            Held_Color = Color3.fromRGB(255, 71, 77),
+        },
+    },
+}
+
+if getgenv().bronx.Visuals.Self.Enabled then
+    local genv = {}
+    genv.player = game.Players.LocalPlayer
+
+    genv.applyForceFieldToModel = function(model, color)
+        for _, desc in pairs(model:GetDescendants()) do
+            if desc:IsA("BasePart") then
+                desc.Material = Enum.Material.ForceField
+                desc.Color = color
+                desc.CanCollide = false
+            end
+        end
+    end
+
+    genv.setupCharacter = function(character)
+        genv.applyForceFieldToModel(character, getgenv().bronx.Visuals.Self.Color)
+
+        character.ChildAdded:Connect(function(child)
+            if child:IsA("Tool") then
+                genv.applyForceFieldToModel(child, getgenv().bronx.Visuals.Self.Held_Color)
+            end
+        end)
+        for _, child in pairs(character:GetChildren()) do
+            if child:IsA("Tool") then
+                genv.applyForceFieldToModel(child, getgenv().bronx.Visuals.Self.Held_Color)
+            end
+        end
+    end
+
+    genv.player.CharacterAdded:Connect(function(character)
+        genv.setupCharacter(character)
+    end)
+
+    if genv.player.Character then
+        genv.setupCharacter(genv.player.Character)
+    end
+end
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Bronx Wars (PRIVATE)", "BloodTheme")
 
