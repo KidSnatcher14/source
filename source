@@ -56,6 +56,7 @@ PlayerSection = Player:NewSection("Player")
 PlayerSection:NewTextBox("Gun Modification", "Type Gun Name Here", function(txt)
 local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
 bitch["Auto"] = true
+bitch["BaseDamage"] = 9999
 bitch["FireRate"] = 0.05
 bitch["ReloadTime"] = 0
 bitch["Spread"] = 0
@@ -65,7 +66,7 @@ bitch["VisibleBullet"] = false
 bitch["BulletHoleSize"] = 0
 bitch["DamageDropOffEnabled"] = false
 bitch["CameraRecoilingEnabled"] = false
-bitch["HeadshotDamageMultiplier"] = 100
+bitch["HeadshotDamageMultiplier"] = 9999
 bitch["BulletHoleVisibleTime"] = 0
 bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {9099130679}
@@ -75,6 +76,7 @@ end)
 PlayerSection:NewTextBox("Cum Everywhere", "Type Gun Name Here", function(txt)
 local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
 bitch["Auto"] = true
+bitch["BaseDamage"] = 9999
 bitch["FireRate"] = 0.02
 bitch["ReloadTime"] = 0
 bitch["Spread"] = 0
@@ -84,7 +86,7 @@ bitch["VisibleBullet"] = false
 bitch["BulletHoleSize"] = 999999
 bitch["DamageDropOffEnabled"] = false
 bitch["CameraRecoilingEnabled"] = false
-bitch["HeadshotDamageMultiplier"] = 100
+bitch["HeadshotDamageMultiplier"] = 9999
 bitch["BulletHoleVisibleTime"] = 999999
 bitch["BulletHoleTexture"] = {0}
 bitch["HitCharSndIDs"] = {7260915425}
