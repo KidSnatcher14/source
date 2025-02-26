@@ -49,7 +49,7 @@ if getgenv().bronx.Visuals.Self.Enabled then
 end
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Bronx Wars (PRIVATE)", "BloodTheme")
+local Window = Library.CreateLib("bronx.lol", "BloodTheme")
 
 Player = Window:NewTab("Player")
 PlayerSection = Player:NewSection("Player")
@@ -452,6 +452,192 @@ end
 game.Players.PlayerAdded:Connect(function(Player)
     table.insert(Skeletons, Library:NewSkeleton(Player, true))
 end)
+end)
+PlayerSection:NewButton("Fly", ":P", function(state)
+local SPEED = 2
+local Limb = "HumanoidRootPart"
+local UpK = "KeypadEight"; local Toggle = "X"; local DownK = "KeypadTwo"; local AscendK = "Q"; local DescendK = "E" 
+local Up = false
+local Down = false
+local UIS = game:GetService("UserInputService")
+local Mouse = game.Players.LocalPlayer:GetMouse()
+local LP = game.Players.LocalPlayer
+local T = Instance.new("Part",Terrain);T.Massless = true;T.CustomPhysicalProperties = PhysicalProperties.new(0,0,0,0,0);T.CanCollide = false;T.Transparency = 1
+local TW = Instance.new("Weld",T)
+TW.Part0 = T
+
+local function Died(c)
+if c:FindFirstChild("Humanoid") then
+c.ChildRemoved:Connect(function(x)
+wait()
+if tostring(x) == "Head" then
+TW.Part1 = nil
+T.Parent = nil 
+end
+end)
+c.Humanoid.Died:Connect(function()
+TW.Part1 = nil
+T.Parent = nil
+end)
+end
+end
+
+local function GetLimb()
+local Char = LP.Character
+
+return Char:FindFirstChild(Limb)
+end
+T.Size = GetLimb().Size
+TW.Part1 = GetLimb()
+local CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+local lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+local BG = Instance.new('BodyGyro')
+local BV = Instance.new('BodyVelocity')
+BG.P = 9e4
+BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+BG.CFrame = T.CFrame
+BV.Velocity = Vector3.new(0, 0, 0)
+BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+Mouse.KeyDown:connect(function(KEY)
+if KEY:lower() == 'w' then
+CONTROL.F = SPEED
+elseif KEY:lower() == 's' then
+CONTROL.B = -SPEED
+elseif KEY:lower() == 'a' then
+CONTROL.L = -SPEED 
+elseif KEY:lower() == 'd' then 
+CONTROL.R = SPEED
+elseif KEY:lower() == 'q' then 
+CONTROL.Q = SPEED/2
+elseif KEY:lower() == 'e' then 
+CONTROL.E = -SPEED/2
+end
+end)
+Mouse.KeyUp:connect(function(KEY)
+if KEY:lower() == 'w' then
+CONTROL.F = 0
+elseif KEY:lower() == 's' then
+CONTROL.B = 0
+elseif KEY:lower() == 'a' then
+CONTROL.L = 0
+elseif KEY:lower() == 'd' then
+CONTROL.R = 0
+elseif KEY:lower() == 'q' then 
+CONTROL.Q = 0
+elseif KEY:lower() == 'e' then 
+CONTROL.E = 0
+end
+end)
+UIS.InputBegan:Connect(function(input, processed)
+if not processed then
+if input.KeyCode == Enum.KeyCode[Toggle] then
+if T.Parent ~= nil then
+ TW.Part1 = nil
+T.Parent = nil
+else
+T.Parent = workspace.Terrain
+TW.Part1 = GetLimb()
+end
+if T == nil then
+T = Instance.new("Part",Terrain);T.Massless = true;T.CustomPhysicalProperties = PhysicalProperties.new(0,0,0,0,0);T.CanCollide = false;T.Transparency = 1
+T.Size = GetLimb().Size
+else
+T.Velocity = Vector3.new()
+T.RotVelocity = Vector3.new()
+end
+if TW == nil then  
+TW = Instance.new("Weld",T)
+TW.Part0 = T
+TW.Part1 = GetLimb()
+end
+end
+if input.KeyCode == Enum.KeyCode[UpK] then
+Up = true
+end
+if input.KeyCode == Enum.KeyCode[DownK] then
+Down = true
+end
+if input.KeyCode == Enum.KeyCode[AscendK] then
+CONTROL.Q = SPEED * 1.5
+end
+if input.KeyCode == Enum.KeyCode[DescendK] then
+CONTROL.E = -SPEED * 1.5
+end
+end
+end)
+
+UIS.InputEnded:Connect(function(input, processed)
+if not processed then
+if input.KeyCode == Enum.KeyCode[UpK] then
+Up = false
+end
+if input.KeyCode == Enum.KeyCode[DownK] then
+Down = false
+end
+if input.KeyCode == Enum.KeyCode[AscendK] then
+CONTROL.Q = 0
+end
+if input.KeyCode == Enum.KeyCode[DescendK] then
+CONTROL.E = 0
+end
+end
+end)
+
+local mt = getrawmetatable(game)
+local oldindex = mt.__index
+local oldnewindex = mt.__newindex
+setreadonly(mt, false)
+
+local mt = getrawmetatable(game)
+local backupnamecall = mt.__namecall
+local backupnewindex = mt.__newindex
+local backupindex = mt.__index
+local setreadonly = setreadonly or make_writeable
+local getnamecallmethod = getnamecallmethod or get_namecall_method
+local newcclosure = newcclosure or function(f) return f end
+setreadonly(mt, false)
+
+mt.__namecall = newcclosure(function(...)
+  local method = getnamecallmethod()
+  local args = {...}
+  
+  if string.lower(method) == "IsA" and (args[1] == BG or args[1] == BV) then
+args[2] = ""
+  return nil
+  elseif string.lower(method)=="FindFirstChildOfClass" and (args[2]==BG.Parent) then
+    return nil
+end
+  return backupnamecall(...)
+end)
+
+BG.Parent = T
+BV.Parent = T
+
+while true do
+wait()
+if T.Parent ~= nil then
+if CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0 then
+SF = 50
+elseif not (CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0) and SF ~= 0 then
+SF = 0
+end
+if (CONTROL.L + CONTROL.R) ~= 0 or (CONTROL.F + CONTROL.B) ~= 0 or (CONTROL.Q + CONTROL.E) ~= 0 then
+BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (CONTROL.F + CONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(CONTROL.L + CONTROL.R, (CONTROL.F + CONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SF
+lCONTROL = {F = CONTROL.F, B = CONTROL.B, L = CONTROL.L, R = CONTROL.R}
+elseif (CONTROL.L + CONTROL.R) == 0 and (CONTROL.F + CONTROL.B) == 0 and (CONTROL.Q + CONTROL.E) == 0 and SF ~= 0 then
+BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (lCONTROL.F + lCONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(lCONTROL.L + lCONTROL.R, (lCONTROL.F + lCONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SF
+else
+BV.velocity = Vector3.new(0, 0, 0)
+end
+BG.CFrame = workspace.CurrentCamera.CoordinateFrame
+if Down == true and not Up == true and not (SPEED - 0.25 == 0 or SPEED - 0.25 <= 0) then
+SPEED = SPEED - 0.25
+end
+if not Down == true and Up == true and not (SPEED + 0.25 == 60 or SPEED + 0.25 >= 60) then
+SPEED = SPEED + 0.25 
+end
+end
+end
 end)
 
 Player = Window:NewTab("Credits")
