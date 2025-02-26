@@ -69,6 +69,7 @@ bitch["CameraRecoilingEnabled"] = false
 bitch["HeadshotDamageMultiplier"] = 9999
 bitch["BulletHoleVisibleTime"] = 0
 bitch["BulletHoleTexture"] = {0}
+bitch["HitmarkerEnabled"] = true
 bitch["HitCharSndIDs"] = {9099130679}
 bitch["HitSoundIDs"] = {7895471766}
 bitch["Lifesteal"] = 1
@@ -89,9 +90,44 @@ bitch["CameraRecoilingEnabled"] = false
 bitch["HeadshotDamageMultiplier"] = 9999
 bitch["BulletHoleVisibleTime"] = 999999
 bitch["BulletHoleTexture"] = {0}
+bitch["HitmarkerEnabled"] = true
 bitch["HitCharSndIDs"] = {7260915425}
 bitch["HitSoundIDs"] = {7260915425}
 bitch["Lifesteal"] = 1
+end)
+PlayerSection:NewTextBox("Explosive Bullet", "Type Gun Name Here", function(txt)
+local bitch = require(game.Players.LocalPlayer.Backpack[(txt)].Setting["1"])
+bitch["Auto"] = true
+bitch["BaseDamage"] = 9999
+bitch["FireRate"] = .2
+bitch["ReloadTime"] = 0
+bitch["Spread"] = 0
+bitch["Recoil"] = 0
+bitch["BulletSpeed"] = 9999
+bitch["VisibleBullet"] = false
+bitch["BulletHoleSize"] = 0
+bitch["DamageDropOffEnabled"] = false
+bitch["CameraRecoilingEnabled"] = false
+bitch["HeadshotDamageMultiplier"] = 9999
+bitch["BulletHoleVisibleTime"] = 0
+bitch["BulletHoleTexture"] = {0}
+bitch["HitCharSndIDs"] = {9099130679}
+bitch["HitSoundIDs"] = {7895471766}
+bitch["Lifesteal"] = 1
+bitch["CustomExplosion"] = true
+bitch["ExplosionRadius"] = 999
+bitch["ExplosiveEnabled"] = true
+bitch["ExplosionSoundVolume"] = 999999999999999
+bitch["ExplosionKnockback"] = false
+bitch["ExplosionKnockbackPower"] = 999999999
+bitch["ExplosionSoundPitchMax"] = 1
+bitch["ExplosionSoundPitchMin"] = 1
+bitch["HitmarkerEnabled"] = true
+bitch["ZeroDamageDistance"] = 999999999
+bitch["ExplosionKnockbackMultiplierOnTarget"] = 99999999
+bitch["ExplosionSoundIDs"] = {
+            [1] = 128008805942052
+        }
 end)
 PlayerSection:NewTextBox("ChatGPT Cframe", "Z", function(txt)
 local player = game:GetService("Players").LocalPlayer
