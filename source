@@ -163,7 +163,6 @@ userInputService.InputBegan:Connect(function(input, processed)
     end
 end)
 
-
 runService.RenderStepped:Connect(function(deltaTime)
     if speedEnabled then
         humanoidRootPart.Anchored = false 
@@ -171,6 +170,41 @@ runService.RenderStepped:Connect(function(deltaTime)
         humanoidRootPart.CFrame = humanoidRootPart.CFrame + (moveDirection * speed * deltaTime)
     end
 end)
+end)
+PlayerSection:NewButton("Fist Spam", "hold lmb", function(state)
+local player = game:GetService("Players").LocalPlayer
+local toolName = "Fists"
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local holding = false
+
+local function onInputBegan(input, gameProcessed)
+    if gameProcessed then return end
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        holding = true
+        while holding do
+            local character = player.Character
+            if character and character:FindFirstChild(toolName) then
+                local args1 = {"RightHook"}
+                character.Fists.RemoteEvent2:FireServer(unpack(args1))  
+                local args2 = {"LeftHook"}
+                character.Fists.RemoteEvent:FireServer(unpack(args2))
+                local args3 = {"Stomp"}
+                character.Fists.RemoteEvent3:FireServer(unpack(args3))
+            end
+            task.wait(0.01)
+        end
+    end
+end
+
+local function onInputEnded(input, gameProcessed)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        holding = false
+    end
+end
+
+userInputService.InputBegan:Connect(onInputBegan)
+userInputService.InputEnded:Connect(onInputEnded)
 end)
 
 Main = Window:NewTab("Guns")
