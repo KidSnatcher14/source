@@ -189,7 +189,7 @@ local function onInputBegan(input, gameProcessed)
                 character.Fists.RemoteEvent3:FireServer("Stomp")
                 character.Fists.RemoteEvent4:FireServer("UppaKutty")
             end
-            task.wait(0.1)
+            task.wait(0.25)
         end
     end
 end
