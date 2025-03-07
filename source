@@ -192,7 +192,7 @@ local function onInputBegan(input, gameProcessed)
                 local args3 = {"Stomp"}
                 character.Fists.RemoteEvent3:FireServer(unpack(args3))
             end
-            task.wait(0.01)
+            task.wait(0.1)
         end
     end
 end
